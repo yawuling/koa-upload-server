@@ -27,12 +27,12 @@ router.post('/api/upload', async (ctx) => {
   const writer = fs.createWriteStream(filePath);
   await new Promise((resolve) => {
     writer.on('finish', () => {
-      console.log('finish');
       resolve();
-      
     });
     reader.pipe(writer);
   });
+  const url = `http://localhost:3010/${uuid}${extname}`;
+  console.log(`Upload finished, file's(${file.name}) url is ${url}`);
   ctx.body = {
     url: `http://localhost:3010/${uuid}${extname}`,
   };
