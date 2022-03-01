@@ -20,6 +20,11 @@ app.use(cors({
 router.post('/api/upload', async (ctx) => {
   const { file } = ctx.request.files;
 
+  // 文件不存在的话，直接放行
+  if (!file) {
+    ctx.body = {};
+    return;
+  }
   const reader = fs.createReadStream(file.path);
   const extname = path.extname(file.name);
   const uuid = uuidv4();
