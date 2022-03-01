@@ -1,0 +1,19 @@
+{
+  "name": "koa-upload-server",
+  "version": "1.0.0",
+  "description": "上传服务",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "uuid": "^8.3.2"
+  }
+}
