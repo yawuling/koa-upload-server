@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="file" id="file" />
+    <div id="progress"></div>
+  </div>
+  <script>
+    document.querySelector('#file').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      const form = new FormData();
+      form.append('file', file);
+
+      const xhr = new XMLHttpRequest();
+      xhr.upload.addEventListener('progress', (event) => {
+        console.log(event);
+        const percent = event.loaded / event.total;
+        document.querySelector('#progress').innerHTML = percent;
+      });
+      xhr.open('post', '/api/upload', true);
+      xhr.send(form);
+    });
+  </script>
+</body>
+</html>

@@ -28,7 +28,7 @@ router.post('/api/upload', async (ctx) => {
   const reader = fs.createReadStream(file.path);
   const extname = path.extname(file.name);
   const uuid = uuidv4();
-  const filePath = path.join(__dirname, `./files/${uuid}${extname}`);
+  const filePath = path.join(__dirname, `./static/files/${uuid}${extname}`);
   const writer = fs.createWriteStream(filePath);
   await new Promise((resolve) => {
     writer.on('finish', () => {
@@ -36,16 +36,16 @@ router.post('/api/upload', async (ctx) => {
     });
     reader.pipe(writer);
   });
-  const url = `http://localhost:3010/${uuid}${extname}`;
+  const url = `http://localhost:3010/files/${uuid}${extname}`;
   console.log(`Upload finished, file's(${file.name}) url is ${url}`);
   ctx.body = {
-    url: `http://localhost:3010/${uuid}${extname}`,
+    url: `http://localhost:3010/files/${uuid}${extname}`,
   };
 });
 
 app.use(router.routes()).use(router.allowedMethods());
-app.use(serve('files'));
+app.use(serve('static'));
 
-app.listen(3010, () => {
+app.listen(3020, () => {
   console.log('server is running, http://localhost:3010');
 });

@@ -1,4 +1,5 @@
 files/*
 !files/README.md
+static/files
 node_modules
 .DS_Store
